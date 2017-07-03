@@ -32,7 +32,7 @@ app.set('view engine', 'html')
 var status = false
 
 function requireAuthentication(req, res, next) {
-	console.log("authentication")
+	// console.log("authentication")
 	if (req.cookies.usersinfo) {
 		var id = req.cookies.usersinfo.split("&"),
 			username = id[0],
@@ -53,12 +53,16 @@ app.all('*', requireAuthentication)
 app.get("/", (req, res) => {
 	res.render('index', {
 		title: "index",
-		login: status
+		login: status,
+		username: "mooniitt"
 	})
 })
 
+/*注册*/
 app.get("/register", (req, res) => {
-	res.render('register')
+	res.render('register', {
+		title: 'Register'
+	})
 })
 app.post("/register", (req, res) => {
 	var username = req.body.username,
@@ -74,11 +78,12 @@ app.post("/register", (req, res) => {
 			res.redirect('/login')
 				// res.send("register successed!")
 		} else {
-			res.send("this account is existed!")
+			res.send("wait 2000ms")
 		}
 	})
 })
 
+/*登录*/
 app.get("/login", (req, res) => {
 	res.render('login', {
 		title: "Login"
@@ -100,14 +105,19 @@ app.post("/login", (req, res) => {
 		}
 	})
 })
+
+/*退出登录*/
 app.get("/loginout", (req, res) => {
 	res.render("index", {
-		login: false
+		login: false,
+		title: 'index'
 	})
 })
 
 app.get("/store", (req, res) => {
-	res.render("store")
+	res.render("store", {
+		title: 'store'
+	})
 })
 
 app.listen("3333", (err) => {

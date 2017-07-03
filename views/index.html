@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>index</title>
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/main.css">
-  </head>
+  <%- include('./template/head.ejs') %>
   <body>
    	<div class="head">
         <div class="logo">
           <img src="/images/yeah.png" alt="logo">
         </div>
-        <div class="login">
-          <a href="/login">登录</a>
-          <a href="/register">注册</a>
-        </div>
+        <% if(login) {%>
+          <div class="logined">
+            <a href="javascript:void(0)"><%- username %></a>
+            <a href="/loginout">退出</a>
+          </div>
+        <% }else{ %>
+          <div class="login">
+            <a href="/login">登录</a>
+            <a href="/register">注册</a>
+          </div>
+        <% } %>
     </div>
     <div class="container">
       <div class="time">
         <p></p>
       </div>
-      <div>
-        <button>1</button>
-        <button>1</button>
+      <div class="opeator">
+        <button id="signin">11231</button>
+        <button id="signout">11312</button>
         <a class="btn" href="/store">cha kan</a>
       </div>
     </div>
